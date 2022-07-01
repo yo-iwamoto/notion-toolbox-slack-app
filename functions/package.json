@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "functions-framework --source=lib/ --target=helloWorld",
-    "dev": "concurrently \"tsc -w\" \"nodemon --watch ./lib/ --exec yarn start\"",
+    "start": "NODE_ENV=development functions-framework --source=lib/ --target=handleSlack",
+    "dev": "NODE_ENV=development concurrently \"tsc -w\" \"nodemon --watch ./lib/ --exec yarn start\"",
     "typecheck": "tsc --noEmit",
     "lint": "gts lint",
     "clean": "gts clean",
@@ -19,10 +19,14 @@
     "pretest": "yarn run compile",
     "posttest": "yarn run lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@notionhq/client": "^1.0.4",
+    "@slack/bolt": "^3.11.3",
+    "dotenv": "^16.0.1"
+  },
   "devDependencies": {
     "@google-cloud/functions-framework": "^3.1.2",
-    "@types/node": "^14.11.2",
+    "@types/node": "^18.0.0",
     "concurrently": "^7.2.2",
     "gts": "^3.1.0",
     "nodemon": "^2.0.18",

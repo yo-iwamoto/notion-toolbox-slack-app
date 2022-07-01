@@ -7,7 +7,6 @@
     "lint:functions": "eslint --fix --config .eslintrc.js functions/src/**/*.ts"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "eslint": "^8.18.0",
