@@ -11,7 +11,10 @@ export const createCommandHandler =
     try {
       const text = (await callback(args)) ?? 'ok';
 
-      await respond({ text, response_type: 'in_channel' });
+      const textArguments = args.command.text.split(' ');
+      const isSilent = textArguments.includes('-s') || textArguments.includes('--silent');
+
+      await respond({ text, response_type: isSilent ? 'ephemeral' : 'in_channel' });
     } catch (err) {
       if (err instanceof SlackCommandException) {
         await respond({ text: err.displayMessage, response_type: 'in_channel' });
