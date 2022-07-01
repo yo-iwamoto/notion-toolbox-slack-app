@@ -4,7 +4,7 @@ import { createPage } from '../features/notion/createPage';
 import { createCommandHandler } from '../lib/createCommandHandler';
 import { messageUtil } from '../lib/messageUtil';
 
-export const handleNotionTouch = createCommandHandler(async ({ command: { user_id, text } }) => {
+export const handleNotionTouch = createCommandHandler(async ({ command: { user_id } }, text) => {
   const pageName = text === '' ? new Date().toDateString() : text;
 
   const url = await createPage(pageName, NOTION_QUICK_DB_ID);
