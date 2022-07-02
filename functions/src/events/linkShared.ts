@@ -9,7 +9,7 @@ export const handleLinkShared = async ({
 
   await Promise.all(
     event.links.map(async (link) => {
-      const { author, title } = await retrievePage(link.url);
+      const { author, title } = await retrievePage(link.url.replace('&amp;', '&'));
 
       unfurls[link.url] = {
         title,
