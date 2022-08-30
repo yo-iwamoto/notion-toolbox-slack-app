@@ -1,4 +1,4 @@
-import { notion } from './client';
+import { notionAdmin } from './client';
 import * as notionProps from './props';
 
 /**
@@ -8,7 +8,7 @@ import * as notionProps from './props';
  * @throws Error | NotionClientError
  */
 export const createPage = async (title: string, databaseId: string) => {
-  const res = await notion.pages.create({
+  const res = await notionAdmin.pages.create({
     parent: { database_id: databaseId },
     properties: {
       title: notionProps.title(title),
