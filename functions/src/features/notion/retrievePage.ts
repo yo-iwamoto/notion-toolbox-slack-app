@@ -11,14 +11,19 @@ export const retrievePage = async (url: string) => {
   const authorId = res.created_by.id;
   const author = await notion.users.retrieve({ user_id: authorId });
 
+  console.log(res.icon);
   let title = '';
+
+  if (res.icon?.type === 'emoji') {
+    title += `${res.icon.emoji} `;
+  }
 
   Object.values(res.properties).forEach((property) => {
     if (property.type !== 'title') {
       return;
     }
 
-    title = property.title.map((text) => text.plain_text).join();
+    title += property.title.map((text) => text.plain_text).join();
   });
 
   if (title === '') {
