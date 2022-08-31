@@ -1,10 +1,7 @@
-import { retrievePage } from '../features/notion/retrievePage';
-import type { AllMiddlewareArgs, LinkUnfurls, SlackEventMiddlewareArgs } from '@slack/bolt';
+import { retrievePage } from '../lib/notion/retrievePage';
+import type { AllMiddlewareArgs, App, LinkUnfurls, SlackEventMiddlewareArgs } from '@slack/bolt';
 
-export const handleLinkShared = async ({
-  event,
-  client,
-}: SlackEventMiddlewareArgs<'link_shared'> & AllMiddlewareArgs) => {
+const unfurlNotionPage = async ({ event, client }: SlackEventMiddlewareArgs<'link_shared'> & AllMiddlewareArgs) => {
   const unfurls: LinkUnfurls = {};
 
   await Promise.all(
@@ -26,3 +23,9 @@ export const handleLinkShared = async ({
     unfurls,
   });
 };
+
+const register = (app: App) => {
+  app.event('link_shared', unfurlNotionPage);
+};
+
+export default register;

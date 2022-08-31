@@ -11,7 +11,6 @@ export const retrievePage = async (url: string) => {
   const authorId = res.created_by.id;
   const author = await notion.users.retrieve({ user_id: authorId });
 
-  console.log(res.icon);
   let title = '';
 
   if (res.icon?.type === 'emoji') {
