@@ -1,6 +1,6 @@
 import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET } from './config/env';
 import registerNotionTouch from './features/notionTouch';
-import registerUnfurlNotionPage from './features/unfurlNotionPage';
+import registerUnfurlNotionLink from './features/unfurlNotionLink';
 import { App, ExpressReceiver } from '@slack/bolt';
 
 const receiver = new ExpressReceiver({
@@ -13,6 +13,6 @@ const receiver = new ExpressReceiver({
 const app = new App({ receiver, token: SLACK_BOT_TOKEN });
 
 registerNotionTouch(app);
-registerUnfurlNotionPage(app);
+registerUnfurlNotionLink(app);
 
 export const handleSlack = receiver.app;

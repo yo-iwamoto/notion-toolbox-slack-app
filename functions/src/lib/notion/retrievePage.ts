@@ -11,23 +11,19 @@ export const retrievePage = async (url: string) => {
   const authorId = res.created_by.id;
   const author = await notion.users.retrieve({ user_id: authorId });
 
-  let title = '';
+  let pageTitle = '';
 
-  if (res.icon?.type === 'emoji') {
-    title += `${res.icon.emoji} `;
-  }
+  const titlePrefix = res.icon?.type === 'emoji' ? `${res.icon.emoji} ` : null;
 
   Object.values(res.properties).forEach((property) => {
     if (property.type !== 'title') {
       return;
     }
 
-    title += property.title.map((text) => text.plain_text).join();
+    pageTitle += property.title.map((text) => text.plain_text).join();
   });
 
-  if (title === '') {
-    throw new Error();
-  }
+  const title = titlePrefix + pageTitle;
 
   return {
     author,

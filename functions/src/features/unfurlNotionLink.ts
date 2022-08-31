@@ -1,11 +1,13 @@
 import { retrievePage } from '../lib/notion/retrievePage';
 import type { AllMiddlewareArgs, App, LinkUnfurls, SlackEventMiddlewareArgs } from '@slack/bolt';
 
-const unfurlNotionPage = async ({ event, client }: SlackEventMiddlewareArgs<'link_shared'> & AllMiddlewareArgs) => {
+const unfurlNotionLink = async ({ event, client }: SlackEventMiddlewareArgs<'link_shared'> & AllMiddlewareArgs) => {
   const unfurls: LinkUnfurls = {};
 
   await Promise.all(
     event.links.map(async (link) => {
+      if (link.url.includes('#')) {
+      }
       const { author, title } = await retrievePage(link.url.replace('&amp;', '&'));
 
       unfurls[link.url] = {
@@ -25,7 +27,7 @@ const unfurlNotionPage = async ({ event, client }: SlackEventMiddlewareArgs<'lin
 };
 
 const register = (app: App) => {
-  app.event('link_shared', unfurlNotionPage);
+  app.event('link_shared', unfurlNotionLink);
 };
 
 export default register;
