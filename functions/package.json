@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^3.1.2",
-    "@notionhq/client": "^1.0.4",
+    "@notionhq/client": "^2.2.0",
     "@slack/bolt": "^3.11.3",
     "dotenv": "^16.0.1"
   },
