@@ -1,6 +1,6 @@
-import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET } from './config/env';
 import registerNotionTouch from './features/notionTouch';
 import registerUnfurlNotionLink from './features/unfurlNotionLink';
+import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET } from '../../config/env';
 import { App, ExpressReceiver } from '@slack/bolt';
 
 const receiver = new ExpressReceiver({

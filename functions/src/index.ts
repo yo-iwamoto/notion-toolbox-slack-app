@@ -1,1 +1,1 @@
-export { handleSlack } from './app';
+export { handleSlack } from './functions/handleSlack';

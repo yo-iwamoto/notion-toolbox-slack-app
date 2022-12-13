@@ -1,4 +1,4 @@
-import { NOTION_QUICK_DB_ID } from '../config/env';
+import { NOTION_QUICK_DB_ID } from '../../../config/env';
 import { createPage } from '../lib/notion/createPage';
 
 import { createCommandHandler } from '../lib/createCommandHandler';
