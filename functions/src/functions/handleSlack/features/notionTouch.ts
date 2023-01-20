@@ -1,8 +1,8 @@
 import { NOTION_QUICK_DB_ID } from '../../../config/env';
-import { createPage } from '../lib/notion/createPage';
+import { createPage } from '../../../lib/notion/createPage';
 
-import { createCommandHandler } from '../lib/createCommandHandler';
-import { messageUtil } from '../lib/messageUtil';
+import { createCommandHandler } from '../../../lib/createCommandHandler';
+import { messageUtil } from '../../../lib/messageUtil';
 import { App } from '@slack/bolt';
 
 const notionTouch = createCommandHandler(async ({ command: { user_id } }, text) => {

@@ -10,6 +10,11 @@ export const messageUtil = {
   userMention: (userId: string) => `<@${userId}>`,
 
   /**
+   * メッセージ内で展開できる形式のユーザーグループメンションを返す
+   */
+  teamMention: (teamId: string) => `<!subteam^${teamId}>`,
+
+  /**
    * 太字のデコレーション
    *
    * @param text string
@@ -24,4 +29,9 @@ export const messageUtil = {
    * @returns string
    */
   multiline: (texts: string[]) => texts.join(EOL),
+
+  /**
+   * リンク
+   */
+  link: (url: string, text: string) => `<${url}|${text}>`,
 };

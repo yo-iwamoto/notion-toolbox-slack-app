@@ -1,4 +1,4 @@
-import { retrievePage } from '../lib/notion/retrievePage';
+import { retrievePage } from '../../../lib/notion/retrievePage';
 import type { AllMiddlewareArgs, App, LinkUnfurls, SlackEventMiddlewareArgs } from '@slack/bolt';
 
 const unfurlNotionLink = async ({ event, client }: SlackEventMiddlewareArgs<'link_shared'> & AllMiddlewareArgs) => {
