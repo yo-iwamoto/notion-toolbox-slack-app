@@ -1,5 +1,6 @@
 import registerNotionTouch from './features/notionTouch';
 import registerUnfurlNotionLink from './features/unfurlNotionLink';
+import registerPaddleTeacher from './features/paddleTeacher';
 import { SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET } from '../../config/env';
 import { App, ExpressReceiver } from '@slack/bolt';
 
@@ -14,5 +15,6 @@ const app = new App({ receiver, token: SLACK_BOT_TOKEN });
 
 registerNotionTouch(app);
 registerUnfurlNotionLink(app);
+registerPaddleTeacher(app);
 
 export const handleSlack = receiver.app;

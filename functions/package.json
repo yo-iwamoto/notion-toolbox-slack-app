@@ -8,10 +8,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:handleSlack": "NODE_ENV=development functions-framework --source=lib/ --target=handleSlack",
-    "start:paddle": "NODE_ENV=development functions-framework --source=lib/ --target=paddle",
-    "dev:handleSlack": "NODE_ENV=development concurrently \"tsc -w\" \"nodemon --watch ./lib/ --exec yarn start:handleSlack\"",
-    "dev:paddle": "NODE_ENV=development concurrently \"tsc -w\" \"nodemon --watch ./lib/ --exec yarn start:paddle\"",
+    "start": "NODE_ENV=development functions-framework --source=lib/ --target=handleSlack",
+    "dev": "NODE_ENV=development concurrently \"tsc -w\" \"nodemon --watch ./lib/ --exec yarn start\"",
     "typecheck": "tsc --noEmit",
     "lint": "gts lint",
     "clean": "gts clean",
