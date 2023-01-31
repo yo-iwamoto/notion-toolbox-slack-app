@@ -38,7 +38,6 @@ app.event('reaction_added', async ({ event, say }) => {
   if (event.item.type !== 'message') return;
   // reaction の emoji が :sumi: でない時、終了
   if (event.reaction !== 'sumi') return;
-  console.log(event.item.ts);
 
   const res = await app.client.reactions.get({
     channel: WAIT_LIST_SLACK_TARGET_CHANNEL_ID,
