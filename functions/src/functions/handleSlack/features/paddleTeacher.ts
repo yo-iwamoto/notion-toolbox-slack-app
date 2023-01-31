@@ -5,7 +5,6 @@ import { App } from '@slack/bolt';
 import { PageObjectResponse, PartialPageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const BOT_MAINTAINER_USER_ID = 'U039U2U8ZDF';
-const MAINTAIN_TEAM_ID = 'S03M673UAJH';
 
 /** 後方一致で、半角スペースor全角スペース + '教えて' */
 const messageRegex = /( |　)+教えて$/;
@@ -60,7 +59,15 @@ const register = (app: App) => {
       const messages = [...mainMessage, ...suggestionMessage].flatMap((v) => (v === null ? [] : v));
 
       if (messages.length === 0) {
-        await say(`該当するものがありませんでした ${messageUtil.teamMention(MAINTAIN_TEAM_ID)}`);
+        await say(
+          messageUtil.multiline([
+            '該当する単語がありませんでした。定義が必要と思われる場合、@team_paddle にお知らせください。',
+            `また、全ての単語は${messageUtil.link(
+              'https://www.notion.so/Paddle-667463b498b5486ab8cbbed76ab4ab39',
+              'こちら',
+            )}からご確認ください。`,
+          ]),
+        );
         return;
       }
 
@@ -81,15 +88,18 @@ const parseWord = (word: PageObjectResponse | PartialPageObjectResponse) => {
   if (
     !('properties' in word) ||
     word.properties['単語'].type !== 'title' ||
-    word.properties['定義'].type !== 'rich_text'
+    word.properties['定義'].type !== 'rich_text' ||
+    word.properties['NG'].type !== 'rich_text' ||
+    word.properties['英語名'].type !== 'rich_text'
   ) {
     return null;
   }
 
   const wordName = messageUtil.boldText(word.properties['単語'].title.map((v) => v.plain_text).join(''));
+  const ng = messageUtil.boldText(word.properties['NG'].rich_text.map((v) => v.plain_text).join(''));
+  const en = messageUtil.boldText(word.properties['英語名'].rich_text.map((v) => v.plain_text).join(''));
   const description = word.properties['定義'].rich_text.map((v) => v.plain_text).join('');
-  const url = `https://www.notion.so/${word.id.replaceAll('-', '')}`;
-  return [messageUtil.link(url, wordName), `➢ ${description}\n`];
+  return [messageUtil.boldText(wordName), `➢ ${description}\n`, `NG: ${ng}`, `英語名: ${en}`];
 };
 
 export default register;
