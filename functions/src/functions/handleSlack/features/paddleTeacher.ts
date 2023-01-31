@@ -95,11 +95,11 @@ const parseWord = (word: PageObjectResponse | PartialPageObjectResponse) => {
     return null;
   }
 
-  const wordName = messageUtil.boldText(word.properties['単語'].title.map((v) => v.plain_text).join(''));
-  const ng = messageUtil.boldText(word.properties['NG'].rich_text.map((v) => v.plain_text).join(''));
-  const en = messageUtil.boldText(word.properties['英語名'].rich_text.map((v) => v.plain_text).join(''));
+  const wordName = word.properties['単語'].title.map((v) => v.plain_text).join('');
+  const ng = word.properties['NG'].rich_text.map((v) => v.plain_text).join('');
+  const en = word.properties['英語名'].rich_text.map((v) => v.plain_text).join('');
   const description = word.properties['定義'].rich_text.map((v) => v.plain_text).join('');
-  return [messageUtil.boldText(wordName), `➢ ${description}\n`, `NG: ${ng}`, `英語名: ${en}`];
+  return [messageUtil.boldText(wordName), `➢ ${description}\n`, `NG: ${ng}`, `英語名: ${en}\n`];
 };
 
 export default register;
