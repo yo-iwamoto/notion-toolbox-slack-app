@@ -13,7 +13,7 @@ export const retrievePage = async (url: string) => {
 
   let pageTitle = '';
 
-  const titlePrefix = res.icon?.type === 'emoji' ? `${res.icon.emoji} ` : null;
+  const titlePrefix = res.icon?.type === 'emoji' ? `${res.icon.emoji} ` : '';
 
   Object.values(res.properties).forEach((property) => {
     if (property.type !== 'title') {
