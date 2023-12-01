@@ -1,3 +1,5 @@
 .runtimeconfig.json
 /lib
 .env
+.yarn/*
+!.yarn/releases
